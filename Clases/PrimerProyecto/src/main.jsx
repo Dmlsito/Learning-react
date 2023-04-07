@@ -11,6 +11,8 @@ import ReactDOM from 'react-dom/client'
 //Esto con javascript tambien se podria hacer, pero en react hay otra forma de llamarlo, estos se llaman componentes
 //IMPORTANTE => PARA LOS COMPONENTES TENEMOS QUE UTILIZAR PASCALCASE PORQUE REACT NO ES CAPAZ DE DIFERENCIAR SI SON COMPONENTES
 //O ELEMENTOS DEL HTML
+import "./index.css"
+import {App} from "./app.jsx"
 const Button = ({text}) => {
   return (
   <button>
@@ -28,15 +30,22 @@ const Button = ({text}) => {
   );
 }
 
-//Este es el punto de entrada de la aplicacion, es el root que vimos en el proyecto anterior
+//Este es el punto de entrada de la aplicacion, es el root que vimos en el proyecto anterior, lo entendemos como la raiz
+//de donde colgaran todos nuestros componentes
 ReactDOM.createRoot(document.getElementById('root')).render(
 
 //Enlazamos el botton en un React.Fragment para poder crear mas de un elemento
 //Aqui vamos a tener un problema y es que si nosotros queremos tener tres botones con un icono vamos a tener que escribir 3 veces
 // ese svg y es grandisimo, para ello tenemos que crear un componente
-
+/*
   <React.Fragment>
     <Button text = "Button1"/>
     <Button text = "Button2"/>
     <Button text = "Button3"/>
   </React.Fragment>)
+  */
+
+  //Ahora vamos a clonar una parte de la pagina de twitter
+ <App/>
+
+)
