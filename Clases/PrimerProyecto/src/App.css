@@ -27,6 +27,7 @@
     border-radius: 50%;
 }
 .tw-follow-card button {
+    cursor: pointer;
     height: 30px;
     width: 80px;
     margin-left: 16px;
@@ -34,4 +35,13 @@
     border-radius: 20px;
     font-weight: bold;
 }
-
+.tw-follow-card-button:hover{
+    background-color: #09f;
+    transition: .4s ease background-color;
+}
+.tw-follow-card-button.is-following {
+    border: 2px solid #f00;
+}
+.tw-follow-card-button.is-following:hover {
+    background-color: #f00;
+}
