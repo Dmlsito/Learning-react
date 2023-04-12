@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 320px;
+}
+
+.board{
+ width: fit-content;
+ margin: 40px auto; 
+ text-align: center;
+}
+.board h1 {
+  color: #eee;
+  margin-bottom: 16px;
+}
+
+.game{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.square {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  display: grid;
+  cursor: pointer;
+  font-size: 48px;
+  /*Con esto ordenamos vertical y horizontalmente, por eso es mejor utilizar en este caso grid que flex*/
+  place-items: center;
+}
+
+.turn{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  border: none;
+  font-size: 80px;
+  gap: 10px;
+}
+
+.square.selected{
+  background: #08f;
+}
+
+.winner{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  top: 0;
+  left: 0;
+  place-items: center;
+  background-color: #000;
+  opacity: .8;
+}
+ .winner .text {
+  background: #111;
+  height: 300px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+  border: 2px solid #eee;
+}
+
+.winner .win {
+  width: fit-content;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px
+}
+
+.turn .square,
+.winner .square {
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  border-color: transparent;
+}
+
+.board button {
+  padding: 8px 12px;
+  margin: 25px;
+  background: transparent;
+  border: 2px solid #eee;
+  color: #eee;
+  width: 100px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.board button:hover {
+  background: #eee;
+  color: #222;
+}
+
