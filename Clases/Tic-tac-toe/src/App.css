@@ -34,7 +34,7 @@ body {
   border-radius: 5px;
   display: grid;
   cursor: pointer;
-  font-size: 48px;
+  font-size: 50px;
   /*Con esto ordenamos vertical y horizontalmente, por eso es mejor utilizar en este caso grid que flex*/
   place-items: center;
 }
@@ -43,6 +43,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  align-items: center;
   border: none;
   font-size: 80px;
   gap: 10px;

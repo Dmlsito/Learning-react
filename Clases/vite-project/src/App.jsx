@@ -1,35 +1,10 @@
 import "./app.css"
 import {useState} from "react" 
 import confetti from "canvas-confetti";
+import Square from "./components/Square"
+import {TURNS, WINNER_COMBOS } from "./constants"
 
-//Game's turns
-const TURNS = {
-    X: "x",
-    O: "o",
-}
-//Square's component
-const Square = ({children, updateBoard, index, isSelected}) => {
-    const className = `square ${isSelected ? `is-selected`: ``}`;
-    
-    const handleClick = () => {
-        updateBoard(index);
-    }
-    return(
-        <div className = {className} onClick = {handleClick}>
-            {children}
-        </div>
-    )
-}
-const WINNER_COMBOS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-]
+
 const App = () => {
     //Dibujamos el tablero, el estado del tablero inicial sera v
     const [board, setBoard] =  useState(Array(9).fill(null))

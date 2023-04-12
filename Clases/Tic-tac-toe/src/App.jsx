@@ -1,36 +1,10 @@
 import "./App.css"
 import {useState} from "react"
-
-//
-const TURNS = {
-  X: "x",
-  O: "o"
-}
-
-const WINNER_COMBOS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-]
-
-const Square = ({children, updateBoard, index, isSelected}) => {
-  const className =  isSelected ? "square selected": "square"; 
-  
-  const handleClick = () => {
-    updateBoard(index)
-  }
- 
-  return (
-    <div className= {className} onClick = {handleClick}>
-      {children}
-    </div>
-  )
-}
+import {Square} from "./components/Square"
+import { BoardSize } from "./components/Board"
+import { TURNS, WINNER_COMBOS } from "./constants"
+import { checkWinner, checkEndGame } from "./logic/board"
+import { WinnerModal } from "./components/WinnerModal"
 
 
 const App = () => {
@@ -39,20 +13,6 @@ const App = () => {
   const [turn, setTurn] = useState(TURNS.X)
   const [winner, setWinner] = useState(null);// null -> no hay ganador true -> ganador false -> tie
   
-  //To check the winner
-  const checkWinner = (boardToCheck) => {
-    for(const combo of WINNER_COMBOS) {
-      //Desestructuracion
-      const [a, b, c] = combo;
-      if(boardToCheck[a] &&
-        boardToCheck[a] === boardToCheck[b] &&
-        boardToCheck[a] === boardToCheck[c]){
-          return boardToCheck[a] // x o y
-        }
-    }
-    return null;
-  }
-
   // To reset the game 
   const resetGame = () => {
     setTurn(TURNS.X);
@@ -60,6 +20,7 @@ const App = () => {
     setWinner(null);
 
   }
+  
   //To update board
   const updateBoard = (index) => {
     if(board[index]) return
@@ -73,7 +34,9 @@ const App = () => {
 
     const newWinner = checkWinner(newBoard)
     if(newWinner){
-      setWinner(newWinner);
+      setWinner(newWinner); // -> winner
+    }else if(checkEndGame(newBoard)){
+      setWinner(false) // -> tie
     }
   }
   
@@ -81,40 +44,13 @@ const App = () => {
     <main className = "board">
       <h1>Tic tac toe</h1>
       <button onClick = {resetGame}> Volver a empezar</button>
-      <section className = "game">
-       {
-        board.map((square, index) => {
-          return <Square key = {index} index = {index} updateBoard = {updateBoard}>{square}</Square>
-        })
-       }
-      </section>
+      <BoardSize board = {board} updateBoard = {updateBoard}></BoardSize>
       <section className="turn">
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
-      
-       {
-        // When all boxes are covered check who has won
-        winner !== null && (
-          <section className = "winner">
-            <div className = "text">
-              <h2>{
-                winner === false ? "Empate": "Gano"
-              }</h2>
-              <header className = "win">
-                {
-                  winner && <Square>{winner}</Square>
-                }
-              </header>
-              <footer>
-                <button onClick = {resetGame}> Volver a empezar</button>
-              </footer>
-            </div>
-          </section>
-        )
-       }
-      
-    </main>
+      <WinnerModal winner={winner} resetGame={resetGame}></WinnerModal>
+      </main>
     
   )
 }
