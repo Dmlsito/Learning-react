@@ -1,5 +1,5 @@
 import "./App.css"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import {Square} from "./components/Square"
 import { BoardSize } from "./components/Board"
 import { TURNS, WINNER_COMBOS } from "./constants"
@@ -7,18 +7,34 @@ import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
 
-const App = () => {
 
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, setTurn] = useState(TURNS.X)
+const App = () => {
+  /* const boardFromStorage = window.localStorage.getItem("board");
+    return boardFromStorage ? JSON.parse(boardFromStorage): Array(9).fill(null) */
+  
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem("board")
+    return boardFromStorage ? JSON.parse(boardFromStorage): Array(9).fill(null)
+  })
+  
+  const [turn, setTurn] = useState(() => {
+    const turnFormStorage = window.localStorage.getItem("turn");
+    return turnFormStorage ?? TURNS.X
+  })
   const [winner, setWinner] = useState(null);// null -> no hay ganador true -> ganador false -> tie
   
+  useEffect(() => {
+    console.log("USE EFFECT")
+  }, [winner] )
+
   // To reset the game 
   const resetGame = () => {
     setTurn(TURNS.X);
     setBoard(Array(9).fill(null))
     setWinner(null);
-
+    //We have to remove the localStorage's content
+    window.localStorage.removeItem("board");
+    window.localStorage.removeItem("turn");
   }
   
   //To update board
@@ -31,6 +47,10 @@ const App = () => {
 
     const newTurn = turn === TURNS.X ? TURNS.O: TURNS.X
     setTurn(newTurn);
+
+    //Save game
+    window.localStorage.setItem("board", JSON.stringify(newBoard))
+    window.localStorage.setItem("turn", newTurn)
 
     const newWinner = checkWinner(newBoard)
     if(newWinner){
