@@ -5,9 +5,38 @@
     flex-direction: column;
     align-items: center;
 }
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+form{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 h1{
     color: #fff;
 }
 ul{
     color: #fff;
 }
+.movies{
+    gap: 32px;
+    list-style: none;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+}
+.movie {
+    text-align: center;
+}
+
+.movie img {
+    border-radius: 8px;
+    object-fit: contain;
+    width: 100%;
+}
+
+

@@ -1,0 +1,21 @@
+.movies-list{
+    color: #fff;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.movies-list li{
+    text-align: center;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.movies-list li img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+
+}
