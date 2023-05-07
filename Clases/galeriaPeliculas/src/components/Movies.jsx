@@ -1,13 +1,13 @@
 import '../css/Movies.css'
 export const Movies = ({movies}) => {
     return  (
-    <ul className="movies-list">
+    <ul className='App-main-gallery'>
     {
       movies ? 
       movies.map(movie => {
-        return <li key={movie.imdbID}>{movie.Title}
-        <span>{movie.Year}</span>
-        <img src={movie.Poster}/></li>
+        return <li key={movie.id} className=''>{movie.title}
+        <span>{movie.year}</span>
+        <img src={movie.poster}/></li>
       }) : 
       <p>No se han encontrado peliculas</p>
     }

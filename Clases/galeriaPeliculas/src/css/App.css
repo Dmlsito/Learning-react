@@ -6,3 +6,39 @@
   flex-direction: column;
   gap: 20px;
 }
+.App-main{
+  width: 100%;
+}
+.App-main-gallery {
+  gap: 32px;
+  color: #fff;
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns:  repeat(auto-fit, minmax(200px, 1fr))
+}
+.App-main-gallery li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+input {
+  opacity: .5;
+  outline: none;
+  color: #fff;
+  margin-right: 5px;
+  padding: 10px;
+  border-radius: 5px ;
+  border: 2px solid #091C32;
+  background: #284B75;
+}
+form button{
+  cursor: pointer;
+  opacity: .5;
+  color: #fff;
+  border: 2px solid #091C32;
+  border-radius: 5px ;
+  background: #284B75;
+  padding: 8px;
+}
