@@ -23,6 +23,9 @@
   gap: 10px;
   text-align: center;
 }
+h1{
+  color: #fff;
+}
 input {
   opacity: .5;
   outline: none;

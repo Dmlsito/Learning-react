@@ -16,14 +16,18 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    getMovies()
+    getMovies({ search })
   }
   const handleChange = e => {
     setSearch(e.target.value)
-
   }
+
+  useEffect(() => {
+    console.log('getMovies')
+  }, [getMovies])
   return( 
     <div className='App'>
+    <h1>Buscador de peliculas</h1>
     <header>
       <form onSubmit={handleSubmit}>
       <input type='checkbox' onChange={handleSort} checked={sort}/>
