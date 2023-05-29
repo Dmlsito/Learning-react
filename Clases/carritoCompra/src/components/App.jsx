@@ -2,34 +2,27 @@ import { useState } from 'react'
 import { Products } from './Product.jsx'
 import { products as initialProducts} from '../mocks/products.json'
 import { Header } from './Header.jsx'
+import { Footer } from './Footer.jsx'
+import { IS_DEVELOPMENT } from '../config.js'
+import { useFilters } from '../hooks/useFilters.js'
+import { Cart } from './Cart.jsx'
+import { CartProvider } from '../context/contextCart.jsx'
+
 
 function App() {
   const [products, setProducts] = useState(initialProducts)
-  const [filters, setFilters] = useState({
-    category: 'all',
-    minPrice: 0
-  })
-
-// ESTO ES MUY IMPORTANTE PORQUE ES PARA JUNIORS //
-  const filterProducts = (products) => {
-    return products.filter(product => {
-      return (
-        product.price >= filters.minPrice && 
-        (
-          filters.category === 'all' ||
-          product.category === filters.category
-        )
-        )
-    })
-  }
-
+  const { filterProducts } = useFilters()
   const filteredProducts = filterProducts(products)
 
   return (
+    <CartProvider>
     <main>
-    <Header changeFilters={setFilters}/>
-      <Products products={filteredProducts}/>
+    <Header />
+    <Cart />
+    <Products products={filteredProducts}/>
+    { IS_DEVELOPMENT && <Footer /> }
     </main>
+    </CartProvider>
   )
 }
 
